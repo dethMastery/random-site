@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Randomized tool</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/xp.css" />
+    <link rel="stylesheet" href="/src/css/main.css" />
+    <link
+      rel="shortcut icon"
+      href="https://suphakit.net/favicon.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="window" style="width: 300px; transform: scale(1.5)">
+        <div class="title-bar">
+          <div class="title-bar-text">mini random software :3</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <div class="text-container" id="main-container">
+            <h3 id="result" style="text-align: center">กดเพิ่มสุ่มเลข</h3>
+
+            <p id="list" style="text-align: center"></p>
+          </div>
+
+          <div class="progress hidden" id="main-progress">
+            <progress max="100" value="0" id="value-progress"></progress>
+          </div>
+
+          <section
+            class="field-row"
+            style="justify-content: flex-end"
+            id="normal-btn-container"
+          >
+            <button onclick="reset()">รีเซ็ต</button>
+            <button onclick="random()">สุ่ม</button>
+          </section>
+
+          <section
+            class="field-row hidden"
+            style="justify-content: flex-end"
+            id="loading-btn-container"
+          >
+            <button disabled>รีเซ็ต</button>
+            <button disabled>สุ่ม</button>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- animation -->
+    <script>
+      const valueElement = document.querySelector("#value-progress");
+
+      const doProgressAnimation = () => {
+        if (valueElement.value < 100) {
+          valueElement.value += 10;
+        }
+      };
+
+      const toggleClass = () => {
+        document
+          .querySelector("#normal-btn-container")
+          .classList.toggle("hidden");
+        document
+          .querySelector("#loading-btn-container")
+          .classList.toggle("hidden");
+
+        document.querySelector("#main-progress").classList.toggle("hidden");
+        document.querySelector("#main-container").classList.toggle("hidden");
+      };
+
+      const randomAnimation = () => {
+        toggleClass();
+
+        valueElement.value = 0;
+
+        let doProgress = setInterval(() => {
+          doProgressAnimation();
+
+          if (valueElement.value === 100) {
+            clearInterval(doProgress);
+          }
+        }, 100);
+
+        setTimeout(() => {
+          toggleClass();
+        }, 1200);
+      };
+    </script>
+
+    <!-- variable -->
+    <script>
+      let length = localStorage.getItem("res_list")
+        ? JSON.parse(localStorage.getItem("res_list"))
+        : [1, 2, 3, 4, 5, 6];
+    </script>
+
+    <!-- main -->
+    <script>
+      const listUpdate = () => {
+        document.querySelector("#list").innerHTML = `[ ${length.toString()} ]`;
+      };
+
+      const random = () => {
+        randomAnimation();
+
+        let result = Math.floor(Math.random() * length.length);
+
+        document.querySelector("#result").innerHTML = length[result];
+
+        length.splice(result, 1);
+        localStorage.setItem("res_list", JSON.stringify(length));
+
+        listUpdate();
+      };
+
+      const reset = () => {
+        localStorage.setItem("res_list", JSON.stringify([1, 2, 3, 4, 5, 6]));
+        length = [1, 2, 3, 4, 5, 6];
+
+        listUpdate();
+      };
+
+      listUpdate();
+    </script>
+  </body>
+</html>
