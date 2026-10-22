@@ -1,8 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Thai:100,200,300,regular,500,600,700);
 
 * {
-  font-family: 'IBM Plex Sans Thai', sans-serif;
-  transition: all .3s;
+  font-family: "IBM Plex Sans Thai", sans-serif;
+  transition: all 0.3s;
 }
 
 body {
@@ -12,7 +12,7 @@ body {
   padding: 0;
   margin: 0;
 
-  background: url('/src/img/background.jpeg');
+  background: url("/src/img/background.jpeg");
   background-position: center !important;
   background-repeat: no-repeat !important;
   background-size: cover !important;
@@ -26,12 +26,18 @@ body {
     justify-content: center;
     align-items: center;
 
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 1;
+
     .text-container {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: .5rem;
+      gap: 0.5rem;
 
       margin-bottom: 1rem;
 
@@ -50,6 +56,43 @@ body {
 
       margin: 1rem 0;
     }
+  }
+
+  .alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 5;
+
+    width: 100%;
+    height: 100dvh;
+
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(1rem);
+
+    #alert-window {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      z-index: -1;
+
+      #alert-body {
+        width: calc(100% - 2rem);
+
+        padding: 0.5rem 1rem;
+        text-wrap: wrap;
+
+        font-size: 1rem;
+        text-align: center;
+      }
+    }
+  }
+
+  .alert.hidden {
+    z-index: -10;
   }
 }
 

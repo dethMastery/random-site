@@ -56,81 +56,46 @@
       </div>
     </div>
 
+    <div class="alert hidden">
+      <div class="window" style="width: 20rem" id="alert-window">
+        <div class="title-bar">
+          <div class="title-bar-text" id="alert-title">
+            A Window With Stuff In It
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <div id="alert-body">
+            <p>There's so much room for activities!</p>
+          </div>
+
+          <section
+            class="field-row"
+            style="justify-content: flex-end"
+            id="loading-btn-container"
+          >
+            <button onclick="close_alert">ปิด</button>
+          </section>
+        </div>
+      </div>
+    </div>
+
     <!-- animation -->
-    <script>
-      const valueElement = document.querySelector("#value-progress");
-
-      const doProgressAnimation = () => {
-        if (valueElement.value < 100) {
-          valueElement.value += 10;
-        }
-      };
-
-      const toggleClass = () => {
-        document
-          .querySelector("#normal-btn-container")
-          .classList.toggle("hidden");
-        document
-          .querySelector("#loading-btn-container")
-          .classList.toggle("hidden");
-
-        document.querySelector("#main-progress").classList.toggle("hidden");
-        document.querySelector("#main-container").classList.toggle("hidden");
-      };
-
-      const randomAnimation = () => {
-        toggleClass();
-
-        valueElement.value = 0;
-
-        let doProgress = setInterval(() => {
-          doProgressAnimation();
-
-          if (valueElement.value === 100) {
-            clearInterval(doProgress);
-          }
-        }, 100);
-
-        setTimeout(() => {
-          toggleClass();
-        }, 1200);
-      };
-    </script>
+    <script src="/src/js/animation.js"></script>
 
     <!-- variable -->
-    <script>
-      let length = localStorage.getItem("res_list")
-        ? JSON.parse(localStorage.getItem("res_list"))
-        : [1, 2, 3, 4, 5, 6];
-    </script>
+    <script src="/src/js/variable.js"></script>
+
+    <!-- alert -->
+    <script src="/src/js/alert.js"></script>
 
     <!-- main -->
-    <script>
-      const listUpdate = () => {
-        document.querySelector("#list").innerHTML = `[ ${length.toString()} ]`;
-      };
 
-      const random = () => {
-        randomAnimation();
-
-        let result = Math.floor(Math.random() * length.length);
-
-        document.querySelector("#result").innerHTML = length[result];
-
-        length.splice(result, 1);
-        localStorage.setItem("res_list", JSON.stringify(length));
-
-        listUpdate();
-      };
-
-      const reset = () => {
-        localStorage.setItem("res_list", JSON.stringify([1, 2, 3, 4, 5, 6]));
-        length = [1, 2, 3, 4, 5, 6];
-
-        listUpdate();
-      };
-
-      listUpdate();
-    </script>
+    <script src="/src/js/main.js"></script>
+    <script src="/src/js/shortkey.js"></script>
   </body>
 </html>
