@@ -1,11 +1,9 @@
 window.addEventListener("keydown", async (e) => {
-  if (e.code === "Space") {
-    random();
-  } else if (e.code === "Escape" || e.code === "Enter") {
+  } else if (e.code === "Escape" || e.code === "Enter" || e.code === "Space") {
     if (!window.document.querySelector(".alert").classList.contains("hidden")) {
       controller.close("keyboard");
     } else {
-      if (e.code === "Enter") {
+      if (e.code === "Enter" || e.code === "Space") {
         random();
       }
     }
