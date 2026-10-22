@@ -9,6 +9,8 @@ A nostalgic, Windows XP-themed web application designed for random number select
 - 🪟 **Windows XP Retro Aesthetic**: Styled using `xp.css` with authentic window frames, title bar controls, buttons, and progress bar elements.
 - 🎲 **Randomization Without Replacement**: Randomly picks an item from the pool (`[1, 2, 3, 4, 5, 6]`) and removes it so numbers don't repeat until reset.
 - ⏳ **Classic Progress Animation**: Simulates a retro Windows loading/calculating progress bar animation before revealing the drawn number.
+- ⚠️ **Empty Pool Alert**: Retro Windows XP alert dialog warns users when the pool is empty and requires a reset.
+- ⌨️ **Keyboard Shortcuts**: Quick interaction using `Space` to randomize and `Escape`/`Enter` to close dialogs.
 - 💾 **State Persistence**: Uses browser `localStorage` (`res_list`) to preserve the remaining pool of numbers across browser refreshes.
 - 🔄 **One-Click Reset**: Easily replenish the pool back to the initial set (`[1, 2, 3, 4, 5, 6]`).
 - 🇹🇭 **Thai UI Support**: Beautifully rendered using Google Fonts' *IBM Plex Sans Thai*.
@@ -24,6 +26,15 @@ A nostalgic, Windows XP-themed web application designed for random number select
 | **List Area**        | `[ 1, 2, 3, 4, 5, 6 ]`    | Current remaining numbers in the pool                  |
 | **Randomize Button** | `สุ่ม`                      | Triggers progress animation and draws a random number  |
 | **Reset Button**     | `รีเซ็ต`                    | Restores pool to original numbers `[1, 2, 3, 4, 5, 6]` |
+| **Alert Dialog**     | `ปิด`                     | Modal alert displayed when pool is depleted            |
+
+### ⌨️ Shortcuts
+
+| Key                 | Action                                      |
+| :------------------ | :------------------------------------------ |
+| <kbd>Space</kbd>    | Trigger random draw (`random()`)            |
+| <kbd>Escape</kbd>   | Dismiss alert modal (`close_alert()`)       |
+| <kbd>Enter</kbd>    | Dismiss alert modal (`close_alert()`)       |
 
 ---
 
@@ -31,13 +42,19 @@ A nostalgic, Windows XP-themed web application designed for random number select
 
 ```text
 .
-├── index.html              # Main HTML structure and inline application logic
+├── index.html              # Main HTML markup and application entry point
 ├── README.md               # Project documentation
 └── src
     ├── css
-    │   └── main.css        # Layout, typography, and custom styling
-    └── img
-        └── background.jpeg # Nostalgic desktop wallpaper background
+    │   └── main.css        # Layout, typography, modal alert, and styling
+    ├── img
+    │   └── background.jpeg # Nostalgic desktop wallpaper background
+    └── js
+        ├── alert.js        # XP-styled modal alert dialog controller
+        ├── animation.js    # Progress bar animation logic
+        ├── main.js         # Core randomizer and pool reset logic
+        ├── shortkey.js     # Keyboard event listeners
+        └── variable.js     # State initialization with localStorage
 ```
 
 ---
